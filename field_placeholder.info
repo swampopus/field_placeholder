@@ -1,0 +1,6 @@
+name = Field placeholder
+description = Provides a placeholder for text based field widgets
+package = Fields
+core = 7.x
+dependencies[] = field
+
