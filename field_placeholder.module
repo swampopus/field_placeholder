@@ -62,6 +62,8 @@ function field_placeholder_get_widget_types() {
 function field_placeholder_field_placeholder_info() {
   return array(
     'text_textfield' => 'value',
+    'text_textarea' => 'value',
+    'text_textarea_with_summary' => 'summary',
     'number' => 'value',
     'email_textfield' => 'email',
   );
