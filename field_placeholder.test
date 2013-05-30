@@ -2,7 +2,7 @@
 
 /**
  * @file
- * File that holds functional tests for Field placeholder module
+ * File that holds functional tests for Field placeholder module.
  */
 
 class FieldPlaceholderTestCase extends DrupalWebTestCase {
@@ -20,7 +20,7 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Prepares the testing environment
+   * Prepares the testing environment.
    */
   function setUp() {
     // Enable minimum required modules.
@@ -82,12 +82,12 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
    }
 
   /**
-   * Performs the basic tests
+   * Performs the basic tests.
    */
   public function testPlaceholderBasic() {
     $bundle_path1 = 'admin/structure/types/manage/' . $this->hyphen_type;
 
-    //Create a basic text field
+    //Create a basic text field.
     $edit = array(
       'fields[_add_new_field][type]' => 'text',
       'fields[_add_new_field][widget_type]' => 'text_textfield',
@@ -97,7 +97,7 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
     $instance_settings = array('instance[placeholder]' => 'Textfield placeholder');
     $this->fieldUIAddNewField($bundle_path1, $edit, array(), $instance_settings);
 
-    //Create a long text field
+    //Create a long text field.
     $edit = array(
       'fields[_add_new_field][type]' => 'text_long',
       'fields[_add_new_field][widget_type]' => 'text_textarea',
@@ -107,7 +107,7 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
     $instance_settings = array('instance[placeholder]' => 'Textarea placeholder');
     $this->fieldUIAddNewField($bundle_path1, $edit, array(), $instance_settings);
 
-    //Create a long text with summary field
+    //Create a long text with summary field.
     $edit = array(
       'fields[_add_new_field][type]' => 'text_with_summary',
       'fields[_add_new_field][widget_type]' => 'text_textarea_with_summary',
@@ -120,7 +120,7 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
     );
     $this->fieldUIAddNewField($bundle_path1, $edit, array(), $instance_settings);
 
-    //Create an integer field
+    //Create an integer field.
     $edit = array(
       'fields[_add_new_field][type]' => 'number_integer',
       'fields[_add_new_field][widget_type]' => 'number',
@@ -130,10 +130,10 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
     $instance_settings = array('instance[placeholder]' => 'Integer placeholder');
     $this->fieldUIAddNewField($bundle_path1, $edit, array(), $instance_settings);
 
-    //Go to node creation page
+    //Go to node creation page.
     $this->drupalGet('node/add/'. $this->hyphen_type);
 
-    //Assertions
+    //Assertions.
     $this->assertRaw('placeholder="Textfield placeholder"', 'Text field placeholder displayed');
     $this->assertRaw('placeholder="Textarea placeholder"', 'Textarea field placeholder displayed');
     $this->assertRaw('placeholder="Summary placeholder"', 'Text with summary field placeholder displayed');
