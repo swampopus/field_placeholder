@@ -25,7 +25,7 @@ class I18nFieldPlaceholderTestCase extends Drupali18nTestCase {
    * Prepares the testing environment.
    */
   function setUp() {
-    parent::setUp('i18n_field', 'i18n_field_placeholder');
+    parent::setUp('i18n_field_placeholder');
     parent::setUpLanguages();
     $this->translator = $this->drupalCreateUser(array('translate interface', 'translate user-defined strings'));
 

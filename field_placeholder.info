@@ -4,5 +4,6 @@ package = Fields
 core = 7.x
 
 dependencies[] = field
+dependencies[] = libraries (>7.x-2.0)
 
 files[] = field_placeholder.test
