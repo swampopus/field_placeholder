@@ -6,4 +6,3 @@ core = 7.x
 dependencies[] = field
 
 files[] = field_placeholder.test
-
