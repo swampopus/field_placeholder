@@ -13,13 +13,45 @@
  */
 function field_placeholder_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
   if (in_array($form['#instance']['widget']['type'], field_placeholder_get_widget_types())) {
-    $form['instance']['placeholder'] = array(
+    $settings = isset($form['#instance']) ? $form['#instance'] : array();
+
+    $form['instance']['placeholder_wrapper'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Placeholder settings'),
+      '#weight' => -4,
+    );
+
+    $form['instance']['placeholder_wrapper']['use_title_as_placeholder'] = array(
+      '#type' => 'radios',
+      '#title' => t('Placeholder source'),
+      '#options' => array(t('Set manual placeholder'), t('Use label as placeholder')),
+      '#default_value' => isset($settings['use_title_as_placeholder']) ? $settings['use_title_as_placeholder'] : 0,
+      '#parents' => array('instance', 'use_title_as_placeholder'),
+    );
+
+    $form['instance']['placeholder_wrapper']['placeholder'] = array(
       '#type' => 'textfield',
       '#title' => t('Placeholder'),
-      '#description' => t('Placeholder value for this field instance'),
-      '#weight' => -4,
-      '#default_value' => isset($form['#instance']['placeholder']) ? $form['#instance']['placeholder'] : '',
+      '#description' => t('Placeholder value for this field instance.'),
+      '#default_value' => isset($settings['placeholder']) ? $settings['placeholder'] : '',
+      '#parents' => array('instance', 'placeholder'),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="instance[use_title_as_placeholder]"]' => array('value' => 0),
+        )
+      )
     );
+
+    $form['instance']['placeholder_wrapper']['info_use_label'] = array(
+      '#type' => 'item',
+      '#markup' => t('Selecting this option, the label of the element will be replaced by the placeholder.'),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="instance[use_title_as_placeholder]"]' => array('value' => 1),
+        )
+      )
+    );
+
   }
 }
 
@@ -32,7 +64,14 @@ function field_placeholder_field_widget_form_alter(&$element, &$form_state, $con
     field_placeholder_add_non_html5_support();
     $placeholder = field_placeholder_get_widget($context['instance']['widget']['type']);
     $instance = module_exists('i18n_field_placeholder') ? i18n_string_object_translate('field_instance', $context['instance']) : $context['instance'];
-    $element[$placeholder]['#attributes']['placeholder'] = check_plain($instance['placeholder']);
+debug($instance);
+    if ($context['instance']['use_title_as_placeholder']) {
+      $element[$placeholder]['#title_display'] = "invisible";
+      $element[$placeholder]['#attributes']['placeholder'] = $instance['label'];
+    }
+    else {
+      $element[$placeholder]['#attributes']['placeholder'] = check_plain($instance['placeholder']);
+    }
   }
 }
 

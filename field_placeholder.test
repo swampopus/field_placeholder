@@ -140,5 +140,24 @@ class FieldPlaceholderTestCase extends DrupalWebTestCase {
     $this->assertRaw('placeholder="Textarea placeholder"', 'Textarea field placeholder displayed');
     $this->assertRaw('placeholder="Summary placeholder"', 'Text with summary field placeholder displayed');
     $this->assertRaw('placeholder="Integer placeholder"', 'Integer field placeholder displayed');
+
+    // Test Label as placeholder feature.
+    $edit = array(
+      'instance[use_title_as_placeholder]' => 1,
+    );
+    $field_types = array('text', 'longtext', 'summary', 'integer');
+    foreach ($field_types as $field_type) {
+      $this->drupalPost('admin/structure/types/manage/' . $this->hyphen_type . '/fields/field_' . $field_type, $edit, t('Save settings'));
+    }
+
+    // Go to node creation page.
+    $this->drupalGet('node/add/' . $this->hyphen_type);
+
+    // Assertions.
+    $this->assertRaw('placeholder="Text"', 'Text field placeholder displayed');
+    $this->assertRaw('placeholder="Long text"', 'Textarea field placeholder displayed');
+    $this->assertRaw('placeholder="Text with summary"', 'Text with summary field placeholder displayed');
+    $this->assertRaw('placeholder="Number"', 'Integer field placeholder displayed');
+
   }
 }
