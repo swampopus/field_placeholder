@@ -64,7 +64,7 @@ function field_placeholder_field_widget_form_alter(&$element, &$form_state, $con
     field_placeholder_add_non_html5_support();
     $placeholder = field_placeholder_get_widget($context['instance']['widget']['type']);
     $instance = module_exists('i18n_field_placeholder') ? i18n_string_object_translate('field_instance', $context['instance']) : $context['instance'];
-debug($instance);
+
     if ($context['instance']['use_title_as_placeholder']) {
       $element[$placeholder]['#title_display'] = "invisible";
       $element[$placeholder]['#attributes']['placeholder'] = $instance['label'];
