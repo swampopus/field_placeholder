@@ -51,7 +51,6 @@ function field_placeholder_form_field_ui_field_edit_form_alter(&$form, &$form_st
         )
       )
     );
-
   }
 }
 
@@ -60,7 +59,7 @@ function field_placeholder_form_field_ui_field_edit_form_alter(&$form, &$form_st
  */
 function field_placeholder_field_widget_form_alter(&$element, &$form_state, $context) {
   if (in_array($context['instance']['widget']['type'], field_placeholder_get_widget_types()) &&
-      isset($context['instance']['placeholder'])) {
+    (!empty($context['instance']['placeholder']) || $context['instance']['use_title_as_placeholder'])) {
     field_placeholder_add_non_html5_support();
     $placeholder = field_placeholder_get_widget($context['instance']['widget']['type']);
     $instance = module_exists('i18n_field_placeholder') ? i18n_string_object_translate('field_instance', $context['instance']) : $context['instance'];
@@ -70,7 +69,7 @@ function field_placeholder_field_widget_form_alter(&$element, &$form_state, $con
       $element[$placeholder]['#attributes']['placeholder'] = $instance['label'];
     }
     else {
-      $element[$placeholder]['#attributes']['placeholder'] = check_plain($instance['placeholder']);
+      $element[$placeholder]['#attributes']['placeholder'] = $instance['placeholder'];
     }
   }
 }
