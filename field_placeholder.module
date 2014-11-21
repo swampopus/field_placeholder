@@ -143,5 +143,6 @@ function field_placeholder_field_placeholder_info() {
     'text_textarea_with_summary' => 'summary',
     'number' => 'value',
     'email_textfield' => 'email',
+    'phone_textfield' => 'value',
   );
 }
