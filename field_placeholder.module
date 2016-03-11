@@ -35,6 +35,7 @@ function field_placeholder_form_field_ui_field_edit_form_alter(&$form, &$form_st
       '#description' => t('Placeholder value for this field instance.'),
       '#default_value' => isset($settings['placeholder']) ? $settings['placeholder'] : '',
       '#parents' => array('instance', 'placeholder'),
+      '#maxlength' => 512,
       '#states' => array(
         'visible' => array(
           ':input[name="instance[use_title_as_placeholder]"]' => array('value' => 0),
