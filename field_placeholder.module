@@ -84,9 +84,8 @@ function field_placeholder_form_field_ui_field_edit_form_alter(&$form, &$form_st
  * Implements hook_field_widget_form_alter().
  */
 function field_placeholder_field_widget_form_alter(&$element, &$form_state, $context) {
-  if (in_array($context['instance']['widget']['type'], field_placeholder_get_widget_types()) &&
-    (!empty($context['instance']['placeholder']) || !empty($context['instance']['use_title_as_placeholder']))) {
-    field_placeholder_add_non_html5_support();
+  if (in_array($context['instance']['widget']['type'], field_placeholder_get_widget_types()) && (!empty($context['instance']['placeholder']) || !empty($context['instance']['use_title_as_placeholder']))) {
+    
     $placeholder = field_placeholder_get_widget($context['instance']['widget']['type']);
     $instance = module_exists('i18n_field_placeholder') ? i18n_string_object_translate('field_instance', $context['instance']) : $context['instance'];
 
@@ -100,20 +99,6 @@ function field_placeholder_field_widget_form_alter(&$element, &$form_state, $con
   }
 }
 
-/**
- * Adds Internet Explorer support through placeholder.js library.
- *
- * http://jamesallardice.github.io/Placeholders.js/
- */
-function field_placeholder_add_non_html5_support() {
-  $header_added = &drupal_static(__FUNCTION__);
-  if (!$header_added) {
-    if (libraries_get_path('placeholder')) {
-      drupal_add_js(libraries_get_path('placeholder') . '/placeholders.jquery.min.js');
-    }
-    $header_added = TRUE;
-  }
-}
 
 /**
  * Returns information about field widgets from hook_field_placeholder_info().
@@ -123,7 +108,7 @@ function field_placeholder_add_non_html5_support() {
  *   information.
  */
 function field_placeholder_get_widgets() {
-  $widgets = &drupal_static(__FUNCTION__);
+  $widgets = &backdrop_static(__FUNCTION__);
 
   if (!$widgets) {
     $widgets = module_invoke_all('field_placeholder_info');

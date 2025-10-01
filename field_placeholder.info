@@ -1,9 +1,4 @@
 name = Field placeholder
+type = module
 description = Provides a placeholder for text based field widgets
-package = Fields
-core = 7.x
-
-dependencies[] = field
-dependencies[] = libraries (>7.x-2.0)
-
-files[] = field_placeholder.test
+backdrop = 1.x
