@@ -1,3 +1,4 @@
 name = Field placeholder translation
 description = Provides i18n field integration for Field placeholder module
 backdrop = 1.x
+dependencies[] = i18n_field

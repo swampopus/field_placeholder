@@ -1,0 +1,6 @@
+Field placeholder
+=================
+
+2025-10-01
+  Initial port to Backdrop, from the Drupal 7 2.x-dev version. Some code was removed or altered in order
+  to make it compatible with Backdrop, especially having to do with the new config file system in Backdrop.
