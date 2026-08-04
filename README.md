@@ -27,11 +27,13 @@ Included with this module is a submodule named i18n_field_placeholder, which all
 Current Maintainers
 -------------------
 
-- [Richard Peacock](https://github.com/swampopus) - Originally ported to Backdrop CMS.
+- [Richard Peacock](https://github.com/swampopus)
 - Seeking additional maintainers.
 
 Credits
 -------
+
+- Ported to Backdrop CMS by [Richard Peacock](https://github.com/swampopus)
 
 This module is ported from and based on the Drupal module field_placeholder (7.x-2.0-dev)
 
